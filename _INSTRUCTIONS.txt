@@ -1,0 +1,147 @@
+============================================================
+DETECTOR DE LLUVIA Y GRANIZO (English below)
+============================================================
+
+VERSIÓN REQUERIDA:
+MATLAB R2023b o superior, con:
+ - Audio Toolbox
+ - Statistics and Machine Learning Toolbox
+
+1. EJECUCIÓN
+------------
+1) Abrir MATLAB.
+2) Ejecutar:
+       AudioImport
+   -> Carga todos los audios de las carpetas de Lluvia, Granizo y Ruido,
+      selecciona 5 segundos desde la mitad de cada archivo y normaliza
+      su volumen.
+3) Ejecutar:
+       Trainer
+   -> Extrae características de cada audio, entrena la matriz de
+      clasificación y abre el menú interactivo.
+
+4) Seguir el menú interactivo:
+   (1) New Samples   -> Clasifica audios nuevos de la carpeta Test.
+   (2) Leave-One-Out -> Evalúa el modelo usando un audio del
+                         entrenamiento como prueba.
+   (3) Auto-Test     -> Evalúa todos los audios de entrenamiento,
+                         mostrando aciertos, fallos y porcentaje.
+   (0) Exit          -> Sale del programa.
+
+2. ORGANIZACIÓN DE AUDIOS
+-------------------------
+../Soundbank/Lluvia    -> audios de lluvia
+../Soundbank/Granizo   -> audios de granizo
+../Soundbank/Ruido     -> otros sonidos (ruido blanco, tráfico, viento...)
+
+Todos los audios deben ser .wav a 44100 Hz.
+Ruidos similares a lluvia pueden clasificarse erróneamente.
+
+3. PROCESO
+----------
+1) AudioImport: carga, recorta y normaliza audios.
+2) Trainer: extrae características (PSD Welch, Spectral Flux,
+   Short-Time Energy, Roll-off, Centroide espectral) y entrena el modelo.
+3) Clasifica en: 1=Lluvia, 2=Granizo, 0=Ruido.
+4) Muestra aciertos, errores, % de éxito y tiempo de cómputo.
+
+4. MEJORA DE RESULTADOS
+-----------------------
+- Usar audios claros y representativos.
+- Ampliar el conjunto de entrenamiento.
+- Ajustar o añadir parámetros de análisis.
+
+============================================================
+(English version) RAIN AND HAIL DETECTOR
+============================================================
+
+REQUIRED VERSION:
+MATLAB R2023b or later, with:
+ - Audio Toolbox
+ - Statistics and Machine Learning Toolbox
+
+1. EXECUTION
+------------
+1) Open MATLAB.
+2) Run:
+       AudioImport
+   -> Loads all audios from the Rain, Hail, and Noise folders,
+      selects a 5-second segment from the middle of each file,
+      and normalizes their volume.
+3) Run:
+       Trainer
+   -> Extracts features from each audio, trains the classification
+      matrix, and opens the interactive menu.
+
+4) Follow the interactive menu:
+   (1) New Samples   -> Classifies new audios from the Test folder.
+   (2) Leave-One-Out -> Tests the model using one training audio
+                         as the sample.
+   (3) Auto-Test     -> Tests all training audios, showing correct
+                         and incorrect classifications and percentage.
+   (0) Exit          -> Exits the program.
+
+2. AUDIO ORGANIZATION
+---------------------
+../Soundbank/Lluvia    -> rain audios
+../Soundbank/Granizo   -> hail audios
+../Soundbank/Ruido     -> other sounds (white noise, traffic, wind...)
+
+All audios must be .wav at 44100 Hz.
+Noises similar to rain may be misclassified.
+
+3. PROCESS
+----------
+1) AudioImport: loads, trims, and normalizes audios.
+2) Trainer: extracts features (PSD Welch, Spectral Flux,
+   Short-Time Energy, Roll-off, Spectral Centroid) and trains the model.
+3) Classifies as: 1=Rain, 2=Hail, 0=Noise.
+4) Shows hits, errors, success percentage, and computation time.
+
+4. IMPROVING RESULTS
+--------------------
+- Use clear and representative audios.
+- Increase the training dataset.
+- Adjust or add analysis parameters.
+============================================================
+============================================================
+FLUJO DE FUNCIONAMIENTO (Flowchart)
+============================================================
+
+        +------------------+
+        |   AudioImport    |
+        |------------------|
+        | - Carga audios   |
+        | - Recorta 5 seg. |
+        | - Normaliza vol. |
+        +--------+---------+
+                 |
+                 v
+        +------------------+
+        |     Trainer      |
+        |------------------|
+        | - Extrae features|
+        | - Crea matriz    |
+        |   entrenamiento  |
+        +--------+---------+
+                 |
+                 v
+        +------------------+
+        | Menú interactivo |
+        |------------------|
+        | (1) New Samples  |
+        | (2) Leave-One-Out|
+        | (3) Auto-Test    |
+        | (0) Exit         |
+        +--------+---------+
+                 |
+                 v
+        +------------------+
+        |  Clasificación   |
+        |------------------|
+        | - Lluvia  (1)    |
+        | - Granizo (2)    |
+        | - Ruido   (0)    |
+        +------------------+
+
+============================================================
